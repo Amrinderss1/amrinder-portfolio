@@ -119,8 +119,8 @@ function initParticleCanvas() {
    ========================================================================== */
 function initScrollReveal() {
   const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.01,
+    rootMargin: '0px 0px 100px 0px'
   };
   
   const observer = new IntersectionObserver((entries) => {
@@ -150,7 +150,7 @@ function initScrollReveal() {
 
 // Global hook to observe newly injected DOM elements
 window.refreshScrollReveal = function() {
-  const observerOptions = { threshold: 0.15 };
+  const observerOptions = { threshold: 0.01, rootMargin: '0px 0px 100px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

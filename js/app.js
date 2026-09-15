@@ -236,6 +236,8 @@ function renderProjectsData() {
       </div>
     </div>
   `).join('');
+
+  filterProjects('all');
 }
 
 function filterProjects(category) {

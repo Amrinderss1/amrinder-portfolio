@@ -1768,6 +1768,12 @@ body.cursor-hover .cursor-follower {
 }
 
 @media (max-width: 768px) {
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
   .interactive-gate-overlay {
     padding: 12px;
   }
