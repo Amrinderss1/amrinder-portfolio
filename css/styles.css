@@ -1368,18 +1368,20 @@ body.cursor-hover .cursor-follower {
 }
 
 /* --------------------------------------------------------------------------
-   17. AMRINDER.OS INTERACTIVE LANDING OVERLAY STYLES
+   17. AMRINDER.OS INTERACTIVE LANDING OVERLAY STYLES (ALWAYS SOLID OPAQUE DARK)
    -------------------------------------------------------------------------- */
 .interactive-gate-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9999;
-  background: var(--bg-primary);
+  z-index: 99999; /* Highest z-index above all navigation bars */
+  background-color: #0a0d14 !important; /* Pure solid dark background - no main site leakage! */
+  color: #f8fafc !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 20px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -1390,34 +1392,51 @@ body.cursor-hover .cursor-follower {
 }
 
 .gate-card-box {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+  background: #121824;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-lg);
   max-width: 760px;
   width: 100%;
-  padding: 40px;
+  padding: 28px;
   position: relative;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(16px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  color: #f8fafc;
 }
 
-.gate-top-actions {
-  position: absolute;
-  top: 20px;
-  right: 24px;
+.gate-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.gate-title-badge {
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent-secondary);
   display: flex;
   align-items: center;
-  gap: 10px;
-  z-index: 20;
+  gap: 8px;
 }
 
-.skip-intro-btn {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.05);
+.gate-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.gate-btn {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.06);
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   transition: all var(--transition-fast);
   white-space: nowrap;
   display: inline-flex;
@@ -1425,28 +1444,34 @@ body.cursor-hover .cursor-follower {
   gap: 6px;
 }
 
-.skip-intro-btn:hover {
-  color: var(--text-primary);
+.gate-btn:hover {
+  color: #ffffff;
   border-color: var(--accent-primary);
-  background: rgba(99, 102, 241, 0.15);
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.gate-btn.active {
+  background: var(--accent-primary);
+  color: #ffffff;
+  border-color: transparent;
 }
 
 /* Boot Sequence Logs */
 .boot-terminal-window {
   background: #06090e;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 20px;
   font-family: var(--font-code);
-  font-size: 0.95rem;
-  min-height: 240px;
+  font-size: 0.925rem;
+  min-height: 220px;
 }
 
 .boot-log-line {
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
-  color: var(--text-secondary);
+  color: #94a3b8;
 }
 
 .status-ok { color: var(--success); font-weight: bold; }
@@ -1455,19 +1480,19 @@ body.cursor-hover .cursor-follower {
 /* Language Selector Buttons */
 .lang-selector-bar {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   margin: 16px 0;
 }
 
 .lang-btn {
-  padding: 8px 18px;
+  padding: 8px 16px;
   border-radius: var(--radius-sm);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  color: var(--text-secondary);
+  background: #1a2333;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
   font-family: var(--font-code);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   font-weight: 600;
   transition: all var(--transition-fast);
 }
@@ -1482,16 +1507,17 @@ body.cursor-hover .cursor-follower {
 /* Code Editor & Compiler Output */
 .code-editor-textarea {
   width: 100%;
-  min-height: 120px;
+  min-height: 140px;
   background: #06090e;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-sm);
   color: #06b6d4;
   font-family: var(--font-code);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   padding: 14px;
   line-height: 1.5;
   resize: vertical;
+  box-sizing: border-box;
 }
 
 .code-editor-textarea:focus {
@@ -1502,13 +1528,14 @@ body.cursor-hover .cursor-follower {
 
 .compiler-terminal {
   background: #04060a;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-sm);
   padding: 14px;
   font-family: var(--font-code);
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   margin-top: 14px;
   min-height: 70px;
+  box-sizing: border-box;
 }
 
 .compiler-terminal.success { border-color: var(--success); }
@@ -1746,19 +1773,13 @@ body.cursor-hover .cursor-follower {
   }
   
   .gate-card-box {
-    padding: 70px 16px 24px 16px;
+    padding: 20px 14px 20px 14px;
     border-radius: var(--radius-md);
   }
 
-  .gate-top-actions {
-    top: 14px;
-    right: 14px;
-    gap: 6px;
-  }
-
-  .skip-intro-btn {
-    padding: 4px 10px;
-    font-size: 0.775rem;
+  .gate-header-row {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
   }
 
   .boot-terminal-window {
@@ -1781,7 +1802,7 @@ body.cursor-hover .cursor-follower {
   .code-editor-textarea {
     font-size: 0.85rem;
     padding: 10px;
-    min-height: 100px;
+    min-height: 130px;
   }
 
   .compiler-terminal {

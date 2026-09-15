@@ -38,20 +38,23 @@
   <!-- AMRINDER.OS INTERACTIVE LANDING OVERLAY -->
   <div class="interactive-gate-overlay" id="interactive-gate-overlay">
     <div class="gate-card-box">
-      <div class="gate-top-actions">
-        <button class="skip-intro-btn tts-toggle-btn" id="gate-tts-btn" title="Toggle Voice / Read Aloud">
-          <i class="fas fa-volume-mute"></i> Speech OFF
-        </button>
-        <button class="skip-intro-btn" onclick="skipIntroGate()" title="Skip straight to portfolio">
-          Skip intro <i class="fas fa-forward"></i>
-        </button>
+      <!-- Static Header Row -->
+      <div class="gate-header-row">
+        <div class="gate-title-badge">
+          <i class="fas fa-terminal text-accent"></i> INITIALIZING AMRINDER.OS
+        </div>
+        <div class="gate-action-buttons">
+          <button class="gate-btn tts-toggle-btn" id="gate-tts-btn" title="Toggle Voice / Read Aloud">
+            <i class="fas fa-volume-mute"></i> Speech OFF
+          </button>
+          <button class="gate-btn" onclick="skipIntroGate()" title="Skip straight to portfolio">
+            Skip intro <i class="fas fa-forward"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Step 1: Boot Sequence -->
       <div id="gate-step-boot">
-        <h3 style="font-family: var(--font-code); font-size: 1.1rem; color: var(--accent-secondary); margin-bottom: 16px;">
-          <i class="fas fa-terminal"></i> INITIALIZING AMRINDER.OS
-        </h3>
         <div class="boot-terminal-window" id="boot-log-container">
           <!-- Logs typed dynamically -->
         </div>

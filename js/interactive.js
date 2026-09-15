@@ -65,24 +65,35 @@ function initTextToSpeech() {
 function loadPreferredVoice() {
   if (!('speechSynthesis' in window)) return;
   const voices = window.speechSynthesis.getVoices();
+  if (!voices || voices.length === 0) return;
 
-  // 1. Try Indian Female Voice (en-IN / Heera / Veena / Google English India)
-  preferredIndianVoice = voices.find(v => 
-    (v.lang === 'en-IN' || v.lang === 'en_IN' || v.name.includes('India') || v.name.includes('Heera') || v.name.includes('Veena')) &&
-    !v.name.toLowerCase().includes('male')
+  // 1. Search for explicit female English voices (Google US/UK Female, Samantha, Zira, Victoria, Heera, Veena, Karen)
+  preferredFemaleVoice = voices.find(v => 
+    v.lang.startsWith('en') && 
+    (v.name.toLowerCase().includes('female') || 
+     v.name.includes('Samantha') || 
+     v.name.includes('Zira') || 
+     v.name.includes('Victoria') || 
+     v.name.includes('Karen') || 
+     v.name.includes('Heera') || 
+     v.name.includes('Veena') || 
+     v.name.includes('Natural') || 
+     v.name.includes('Google US English') || 
+     v.name.includes('Google UK English Female')) &&
+    !v.name.toLowerCase().includes('male') &&
+    !v.name.includes('David') &&
+    !v.name.includes('Mark') &&
+    !v.name.includes('George')
   );
 
-  // 2. Fallback to any soothing female English voice
-  if (!preferredIndianVoice) {
-    preferredIndianVoice = voices.find(v => 
-      v.lang.startsWith('en') && 
-      (v.name.includes('Female') || v.name.includes('Natural') || v.name.includes('Zira') || v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Victoria'))
-    );
+  // 2. Fallback to any Indian English voice (en-IN)
+  if (!preferredFemaleVoice) {
+    preferredFemaleVoice = voices.find(v => v.lang === 'en-IN' || v.lang === 'en_IN');
   }
 
   // 3. Fallback to any English voice
-  if (!preferredIndianVoice) {
-    preferredIndianVoice = voices.find(v => v.lang.startsWith('en'));
+  if (!preferredFemaleVoice) {
+    preferredFemaleVoice = voices.find(v => v.lang.startsWith('en'));
   }
 }
 
@@ -107,13 +118,13 @@ window.speakText = function(text) {
 
   currentUtterance = new SpeechSynthesisUtterance(cleanText);
   
-  // Soothing, relaxed voice parameters
-  currentUtterance.rate = 0.92;   // Slightly relaxed, natural pace
-  currentUtterance.pitch = 1.05;  // Warm, friendly tone
+  // Soothing, natural female voice parameters
+  currentUtterance.rate = 0.88;   // Smooth, relaxed pace
+  currentUtterance.pitch = 1.12;  // Warm, gentle female tone
 
-  if (!preferredIndianVoice) loadPreferredVoice();
-  if (preferredIndianVoice) {
-    currentUtterance.voice = preferredIndianVoice;
+  if (!preferredFemaleVoice) loadPreferredVoice();
+  if (preferredFemaleVoice) {
+    currentUtterance.voice = preferredFemaleVoice;
   }
 
   window.speechSynthesis.speak(currentUtterance);
