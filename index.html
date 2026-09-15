@@ -35,6 +35,160 @@
   <div class="custom-cursor" id="custom-cursor"></div>
   <div class="cursor-follower" id="cursor-follower"></div>
 
+  <!-- AMRINDER.OS INTERACTIVE LANDING OVERLAY -->
+  <div class="interactive-gate-overlay" id="interactive-gate-overlay">
+    <div class="gate-card-box">
+      <div class="gate-top-actions">
+        <button class="skip-intro-btn tts-toggle-btn" id="gate-tts-btn" title="Toggle Voice / Read Aloud">
+          <i class="fas fa-volume-mute"></i> Speech OFF
+        </button>
+        <button class="skip-intro-btn" onclick="skipIntroGate()" title="Skip straight to portfolio">
+          Skip intro <i class="fas fa-forward"></i>
+        </button>
+      </div>
+
+      <!-- Step 1: Boot Sequence -->
+      <div id="gate-step-boot">
+        <h3 style="font-family: var(--font-code); font-size: 1.1rem; color: var(--accent-secondary); margin-bottom: 16px;">
+          <i class="fas fa-terminal"></i> INITIALIZING AMRINDER.OS
+        </h3>
+        <div class="boot-terminal-window" id="boot-log-container">
+          <!-- Logs typed dynamically -->
+        </div>
+      </div>
+
+      <!-- Step 2: Welcome Screen -->
+      <div id="gate-step-welcome" style="display: none;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Hi! 👋</h2>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+          You are currently talking to the web version of Amrinder. :D
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 12px;">The physical version is probably somewhere between:</p>
+        <ul style="list-style: none; margin-bottom: 24px; padding-left: 8px; font-size: 0.95rem; color: var(--text-secondary);">
+          <li style="margin-bottom: 6px;">• fixing an endpoint</li>
+          <li style="margin-bottom: 6px;">• writing some completely unnecessary code</li>
+          <li style="margin-bottom: 6px;">• watching cricket</li>
+          <li style="margin-bottom: 6px;">• reading about black holes</li>
+          <li style="margin-bottom: 6px;">• writing a story nobody asked for</li>
+          <li style="margin-bottom: 6px;">• or wondering why a perfectly good piece of code suddenly stopped working.</li>
+        </ul>
+        <p style="font-size: 1.05rem; font-weight: 600; margin-bottom: 24px; color: var(--accent-primary);">
+          Anyway... Before I let you into my little corner of the internet, I need to know something.
+        </p>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="selectGatePath('techie')">
+            <i class="fas fa-laptop-code"></i> I AM A TECHIE / ENGINEER
+          </button>
+          <button class="btn btn-secondary" onclick="selectGatePath('nontechie')">
+            <i class="fas fa-smile"></i> I'M NOT A TECHIE
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3A: Techie Path (PROVE IT) -->
+      <div id="gate-step-techie" style="display: none;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;">🔐 PROVE IT.</h2>
+        <p style="font-size: 0.98rem; color: var(--text-secondary); margin-bottom: 12px;">
+          Excellent. Finally, someone I can communicate with without explaining what an API is. 😌
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 16px;">
+          But there's a small problem. I don't trust you yet. So... PROVE IT.<br>
+          Write a program to print: <strong style="color: var(--accent-secondary);">Hello Amrinder</strong>. That's it. No algorithms. No data structures. No LeetCode. I'm not interviewing you. 😂
+        </p>
+
+        <!-- Language Selector -->
+        <div class="lang-selector-bar">
+          <button class="lang-btn active" data-lang="python" onclick="selectLanguage('python')">Python</button>
+          <button class="lang-btn" data-lang="c" onclick="selectLanguage('c')">C</button>
+          <button class="lang-btn" data-lang="cpp" onclick="selectLanguage('cpp')">C++</button>
+          <button class="lang-btn" data-lang="java" onclick="selectLanguage('java')">Java</button>
+          <button class="lang-btn" data-lang="assembly" onclick="selectLanguage('assembly')">Assembly</button>
+        </div>
+
+        <div id="lang-joke-comment" style="font-style: italic; color: var(--accent-secondary); font-size: 0.9rem; margin-bottom: 12px;">
+          “Python. Good choice. You understand that life is already complicated enough.”
+        </div>
+
+        <!-- Code Editor -->
+        <textarea id="code-editor-input" class="code-editor-textarea" spellcheck="false"></textarea>
+
+        <div style="margin-top: 14px; display: flex; gap: 12px; align-items: center;">
+          <button id="run-code-btn" class="btn btn-primary btn-sm" onclick="executeVisitorCode()">
+            <i class="fas fa-play"></i> RUN CODE
+          </button>
+        </div>
+
+        <!-- Output Terminal -->
+        <div class="compiler-terminal" id="compiler-output-terminal">
+          <span class="text-muted">> Waiting for code execution...</span>
+        </div>
+      </div>
+
+      <!-- Step 3B: Non-Techie Path -->
+      <div id="gate-step-nontechie" style="display: none;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 8px;">Ah. The honest one. ❤️</h2>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+          Don't worry. You don't need to prove anything.
+        </p>
+        <ul style="list-style: none; margin-bottom: 20px; font-size: 0.95rem; color: var(--text-muted);">
+          <li style="margin-bottom: 4px;">❌ No compiler</li>
+          <li style="margin-bottom: 4px;">❌ No syntax errors</li>
+          <li style="margin-bottom: 4px;">❌ No terminal</li>
+          <li style="margin-bottom: 4px;">❌ No NullPointerException</li>
+        </ul>
+        <p style="color: var(--accent-primary); font-weight: 600; margin-bottom: 20px;">You may proceed peacefully.</p>
+        <button class="btn btn-primary" onclick="showNonTechieTwist()">
+          Continue <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Step 4: Plot Twist Reveal -->
+      <div id="gate-step-plottwist" style="display: none;">
+        <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Well caught. 😎</h2>
+        <p style="font-size: 1.05rem; color: var(--text-secondary); margin-bottom: 16px;">
+          You actually passed! I suppose I have no choice but to let you in...
+        </p>
+        <div style="font-size: 1.5rem; font-weight: 800; color: #ef4444; margin: 16px 0; text-transform: uppercase;">
+          WAIT. ✋
+        </div>
+        <p style="font-size: 1.05rem; color: var(--text-primary); margin-bottom: 12px;">
+          You thought there was a secret Techie section, didn't you? There isn't. 😂
+        </p>
+        <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 16px; line-height: 1.6;">
+          There is only one website. I don't have enough time to build separate websites for techies and normal humans.<br><br>
+          Besides, I'm not trying to become Howard Wolowitz. I'm Leonard Hofstadter. Nerd. But smarty nerd. 😎 Just wish Penny was reading this. XD<br><br>
+          Anyway, congratulations. You've successfully wasted approximately 30 seconds of your life proving that you can print Hello Amrinder.
+        </p>
+        <button class="btn btn-primary" onclick="showPersonalityScan()">
+          ENTER AMRINDER'S SPACE <i class="fas fa-rocket"></i>
+        </button>
+      </div>
+
+      <!-- Step 5: Personality Scan -->
+      <div id="gate-step-personality" style="display: none;">
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">ONE LAST THING...</h2>
+        <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 20px;">What brought you here?</p>
+        
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+          <button class="filter-btn" onclick="selectPersonality('recruiter')">💼 Recruiter / Professional</button>
+          <button class="filter-btn" onclick="selectPersonality('engineer')">🧑‍💻 Fellow Engineer</button>
+          <button class="filter-btn" onclick="selectPersonality('science')">🔭 Science Nerd</button>
+          <button class="filter-btn" onclick="selectPersonality('cricket')">🏏 Cricket Fan</button>
+          <button class="filter-btn" onclick="selectPersonality('random')">👀 Just Curious / Clicked Randomly</button>
+        </div>
+
+        <div id="personality-response-msg"></div>
+
+        <div style="margin-top: 24px;">
+          <button id="personality-enter-btn" class="btn btn-primary" style="display: none;" onclick="enterAmrindersSpace()">
+            ENTER PORTFOLIO <i class="fas fa-door-open"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Sticky Navigation Bar -->
   <header class="navbar" id="navbar">
     <div class="container nav-container">
@@ -53,6 +207,9 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="theme-toggle-btn tts-toggle-btn" id="tts-toggle-btn" title="Toggle Voice / Read Aloud">
+          <i class="fas fa-volume-mute"></i>
+        </button>
         <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme">
           <i class="fas fa-sun"></i>
         </button>
@@ -112,7 +269,7 @@
       </div>
     </section>
 
-    <!-- 2. STATS SECTION -->
+    <!-- 2. STATS SECTION WITH JOKE HOVERS -->
     <section class="stats-section">
       <div class="container">
         <div class="stats-grid" id="stats-grid">
@@ -239,6 +396,21 @@
         <div class="beyond-grid" id="beyond-grid">
           <!-- Beyond cards populated dynamically -->
         </div>
+
+        <!-- Currently Exploring Panel -->
+        <div class="exploring-panel reveal-on-scroll reveal-fade-up">
+          <h4><i class="fas fa-compass text-accent"></i> CURRENTLY EXPLORING</h4>
+          <div class="tag-cloud" style="margin-top: 10px;">
+            <span class="skill-chip">▸ Agentic AI</span>
+            <span class="skill-chip">▸ Endpoint Automation</span>
+            <span class="skill-chip">▸ Azure & Cloud Infrastructure</span>
+            <span class="skill-chip">▸ Cosmology & Astrophysics</span>
+            <span class="skill-chip">▸ New ways to break my own code</span>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-top: 12px;">
+            "Last updated: whenever I remember this exists."
+          </div>
+        </div>
       </div>
     </section>
 
@@ -356,6 +528,7 @@
   <script src="js/data.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/interactive.js"></script>
 
   <!-- Navbar Scrolled Handler & Mobile Toggle -->
   <script>

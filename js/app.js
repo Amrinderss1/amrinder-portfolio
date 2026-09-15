@@ -97,14 +97,21 @@ function renderHeroData() {
 }
 
 /* ==========================================================================
-   3. STATS RENDER
+   3. STATS RENDER WITH HUMOROUS HOVER TOOLTIPS
    ========================================================================== */
 function renderStatsData() {
   const container = document.getElementById('stats-grid');
   if (!container || !PORTFOLIO_DATA.stats) return;
   
+  const tooltips = [
+    "That's longer than some of my fictional cricket careers.",
+    "Four projects. Zero client names. Confidentiality > flexing.",
+    "Unfortunately, none of them came with an IPL trophy.",
+    "Microsoft Intune, SCCM/MECM, VMware Workspace ONE"
+  ];
+
   container.innerHTML = PORTFOLIO_DATA.stats.map((st, idx) => `
-    <div class="stat-card reveal-on-scroll reveal-fade-up delay-${(idx % 4) + 1}">
+    <div class="stat-card reveal-on-scroll reveal-fade-up delay-${(idx % 4) + 1}" title="${tooltips[idx] || ''}">
       <div class="stat-number-wrapper" data-count="${st.number}" data-suffix="${st.suffix}">0</div>
       <div class="stat-label">${st.label}</div>
     </div>

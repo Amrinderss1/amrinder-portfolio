@@ -538,7 +538,6 @@ body.cursor-hover .cursor-follower {
   background: var(--bg-card-hover);
 }
 
-/* Hero Avatar & Styled Portrait Container */
 .hero-visual {
   position: relative;
   display: flex;
@@ -618,11 +617,28 @@ body.cursor-hover .cursor-follower {
   padding: 28px 24px;
   text-align: center;
   transition: transform var(--transition-normal), border-color var(--transition-normal);
+  position: relative;
 }
 
 .stat-card:hover {
   transform: translateY(-5px);
   border-color: var(--border-hover);
+}
+
+.stat-card[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: -36px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-tertiary);
+  color: var(--accent-secondary);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  border: 1px solid var(--border-hover);
+  z-index: 20;
 }
 
 .stat-number-wrapper {
@@ -1132,7 +1148,7 @@ body.cursor-hover .cursor-follower {
 }
 
 /* --------------------------------------------------------------------------
-   14. BEYOND THE ENTERPRISE (PERSONALITY SECTION)
+   14. BEYOND THE ENTERPRISE & CURRENTLY EXPLORING
    -------------------------------------------------------------------------- */
 .beyond-section {
   padding: 80px 0;
@@ -1183,6 +1199,24 @@ body.cursor-hover .cursor-follower {
   color: var(--text-secondary);
   margin-bottom: 20px;
   line-height: 1.6;
+}
+
+.exploring-panel {
+  background: var(--bg-card);
+  border: 1px dashed var(--accent-primary);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-top: 40px;
+}
+
+.exploring-panel h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1348,7 +1382,163 @@ body.cursor-hover .cursor-follower {
 }
 
 /* --------------------------------------------------------------------------
-   17. MODAL POPUP (PROJECT DETAILS)
+   17. AMRINDER.OS INTERACTIVE LANDING OVERLAY STYLES
+   -------------------------------------------------------------------------- */
+.interactive-gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow-y: auto;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.gate-fade-out {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.05);
+}
+
+.gate-card-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  max-width: 760px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+}
+
+.gate-top-actions {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 20;
+}
+
+.skip-intro-btn {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skip-intro-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.15);
+}
+
+/* Boot Sequence Logs */
+.boot-terminal-window {
+  background: #06090e;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  min-height: 240px;
+}
+
+.boot-log-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.status-ok { color: var(--success); font-weight: bold; }
+.status-error { color: #ef4444; font-weight: bold; }
+
+/* Language Selector Buttons */
+.lang-selector-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+
+.lang-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.lang-btn:hover, .lang-btn.active {
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Code Editor & Compiler Output */
+.code-editor-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #06090e;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: #06b6d4;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  padding: 14px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.code-editor-textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.compiler-terminal {
+  background: #04060a;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  margin-top: 14px;
+  min-height: 70px;
+}
+
+.compiler-terminal.success { border-color: var(--success); }
+.compiler-terminal.error { border-color: #ef4444; }
+
+.fade-in-content {
+  animation: fadeInStep 0.4s ease forward;
+}
+
+@keyframes fadeInStep {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --------------------------------------------------------------------------
+   18. MODAL POPUP & TOASTS
    -------------------------------------------------------------------------- */
 .modal-overlay {
   position: fixed;
@@ -1458,9 +1648,6 @@ body.cursor-hover .cursor-follower {
   margin-bottom: 4px;
 }
 
-/* --------------------------------------------------------------------------
-   18. TOAST NOTIFICATIONS
-   -------------------------------------------------------------------------- */
 .toast {
   position: fixed;
   bottom: 30px;
@@ -1573,13 +1760,14 @@ body.cursor-hover .cursor-follower {
   .highlights-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .avatar-wrapper { width: 250px; height: 250px; }
+  .gate-card-box { padding: 24px; }
 }
 
 /* --------------------------------------------------------------------------
    22. PRINT STYLESHEET (@media print)
    -------------------------------------------------------------------------- */
 @media print {
-  #bg-canvas, .ambient-glow, .custom-cursor, .cursor-follower, .theme-toggle-btn, .mobile-menu-btn, .filter-bar, .contact-form, .modal-overlay, .btn {
+  #bg-canvas, .ambient-glow, .custom-cursor, .cursor-follower, .theme-toggle-btn, .mobile-menu-btn, .filter-bar, .contact-form, .modal-overlay, .btn, .interactive-gate-overlay {
     display: none !important;
   }
 
