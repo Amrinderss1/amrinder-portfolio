@@ -292,22 +292,22 @@ window.selectGatePath = function(path) {
 const LANGUAGE_TEMPLATES = {
   python: {
     comment: "“Python. Good choice. You understand that life is already complicated enough.”",
-    code: `# Write Python code to print: Hello Amrinder\n`,
+    code: `# Task: Print "Hello Amrinder"\n`,
     placeholder: `# Write your Python code here...`
   },
   c: {
     comment: "“Ah. C. You enjoy suffering.”",
-    code: `// Write C code to print: Hello Amrinder\n#include <stdio.h>\n\nint main() {\n    // your code here\n    \n    return 0;\n}`,
+    code: `// Task: Print "Hello Amrinder"\n#include <stdio.h>\n\nint main() {\n    // your code here\n    \n    return 0;\n}`,
     placeholder: `// Write your C code here...`
   },
   cpp: {
     comment: "“C++? Because apparently C wasn't complicated enough.”",
-    code: `// Write C++ code to print: Hello Amrinder\n#include <iostream>\n\nint main() {\n    // your code here\n    \n    return 0;\n}`,
+    code: `// Task: Print "Hello Amrinder"\n#include <iostream>\n\nint main() {\n    // your code here\n    \n    return 0;\n}`,
     placeholder: `// Write your C++ code here...`
   },
   java: {
     comment: "“Java. Somewhere, a developer is creating another public static void main.”",
-    code: `// Write Java code to print: Hello Amrinder\npublic class Main {\n    public static void main(String[] args) {\n        // your code here\n    }\n}`,
+    code: `// Task: Print "Hello Amrinder"\npublic class Main {\n    public static void main(String[] args) {\n        // your code here\n    }\n}`,
     placeholder: `// Write your Java code here...`
   },
   assembly: {
@@ -372,51 +372,120 @@ function validateCodeResult(lang, code, outputEl) {
   let humorousComment = '';
   let outputText = '';
 
-  if (lang === 'python') {
-    if (code.includes('print(') && code.includes('Hello Amrinder') && (code.endsWith(')') || code.includes(')\n') || code.includes(')\r'))) {
-      isSuccess = true;
-      outputText = 'Hello Amrinder';
-    } else if (!code.includes(')')) {
-      realError = 'SyntaxError: unexpected EOF while parsing (missing closing parenthesis)';
-      humorousComment = '“Python has politely informed us that you made a mistake. Python is usually very nice. Please don\'t make Python angry.”';
-    } else if (!code.includes('Hello Amrinder')) {
-      const match = code.match(/print\(["'](.*?)["']\)/);
-      outputText = match ? match[1] : 'Output string mismatch';
-      realError = `Output mismatch. Expected: "Hello Amrinder", Received: "${outputText}"`;
-      humorousComment = '“Come on bro, I thought you were a techie. Write print(\\"Hello Amrinder\\")!”';
+  // Clean comments from code to avoid comment text triggering match
+  let cleanCode = code
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .split('\n')
+    .filter(line => !line.trim().startsWith('#') && !line.trim().startsWith('//') && !line.trim().startsWith(';'))
+    .join('\n')
+    .trim();
+
+  if (!cleanCode) {
+    realError = 'Error: Empty source code submitted';
+    humorousComment = '“Writing zero lines of code is a great way to avoid bugs, but you still need to print Hello Amrinder!”';
+  }
+  else if (lang === 'python') {
+    const printMatch = cleanCode.match(/print\s*\(\s*(["'])(.*?)\1\s*\)/s);
+    if (printMatch) {
+      outputText = printMatch[2].trim();
+      const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
+      if (normalized === 'hello amrinder') {
+        isSuccess = true;
+      } else {
+        realError = `OutputMismatchError: Expected "Hello Amrinder", Received "${outputText}"`;
+        if (normalized.includes('ali')) {
+          humorousComment = '“Wait... who is Ali? 😂 This is Amrinder\'s portfolio! Write print("Hello Amrinder")!”';
+        } else {
+          humorousComment = `“You printed '${outputText}'! Come on bro, write print("Hello Amrinder")!”`;
+        }
+      }
+    } else if (!cleanCode.includes('print')) {
+      realError = 'NameError: print statement missing';
+      humorousComment = '“Python is waiting for print(). Don\'t leave Python hanging!”';
+    } else if (!cleanCode.includes('(') || !cleanCode.includes(')')) {
+      realError = 'SyntaxError: invalid print syntax or missing parentheses';
+      humorousComment = '“Python 3 requires parentheses around print arguments!”';
     } else {
-      realError = 'SyntaxError: invalid syntax';
-      humorousComment = '“Python has politely informed us that you made a mistake. Python is usually very nice. Please don\'t make Python angry.”';
+      realError = 'SyntaxError: string missing or invalid string quotes inside print()';
+      humorousComment = '“Make sure your string is inside quotes: print("Hello Amrinder")!”';
     }
   } 
   else if (lang === 'c') {
-    if (code.includes('printf(') && code.includes('Hello Amrinder') && code.includes(';') && code.includes('main')) {
-      isSuccess = true;
-      outputText = 'Hello Amrinder';
-    } else if (!code.includes(';')) {
-      realError = 'error: expected \';\' before \'return\' or at end of statement';
-      humorousComment = '“Compilation failed. Pointers or semicolons missing as usual in C!”';
+    const printfMatch = cleanCode.match(/printf\s*\(\s*(["'])(.*?)\1\s*\)/s);
+    if (!cleanCode.includes('main')) {
+      realError = 'error: undefined reference to \'main\'';
+      humorousComment = '“C cannot find main(). C is lost in memory without main().”';
+    } else if (!cleanCode.includes(';')) {
+      realError = 'error: expected \';\' before end of statement';
+      humorousComment = '“Compilation failed. Semicolons missing as usual in C!”';
+    } else if (printfMatch) {
+      outputText = printfMatch[2].replace('\\n', '').trim();
+      const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
+      if (normalized === 'hello amrinder') {
+        isSuccess = true;
+      } else {
+        realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
+        if (normalized.includes('ali')) {
+          humorousComment = '“Wait... who is Ali? 😂 Write printf("Hello Amrinder");!”';
+        } else {
+          humorousComment = `“You printed '${outputText}'. Write printf("Hello Amrinder");!”`;
+        }
+      }
     } else {
-      realError = 'error: output string mismatch or missing main() entry point';
-      humorousComment = '“Come on bro, I thought you were a techie.”';
+      realError = 'error: missing printf() or invalid string quotes inside printf()';
+      humorousComment = '“C compiler says: where is printf("Hello Amrinder");?”';
     }
   } 
   else if (lang === 'cpp') {
-    if ((code.includes('std::cout') || code.includes('cout')) && code.includes('Hello Amrinder') && code.includes('main')) {
-      isSuccess = true;
-      outputText = 'Hello Amrinder';
+    const coutMatch = cleanCode.match(/(?:std::)?cout\s*<<\s*(["'])(.*?)\1/s);
+    if (!cleanCode.includes('main')) {
+      realError = 'error: undefined reference to \'main\'';
+      humorousComment = '“C++ cannot find main().”';
+    } else if (!cleanCode.includes(';')) {
+      realError = 'error: expected \';\' before end of statement';
+      humorousComment = '“C++ compilation error: missing semicolon.”';
+    } else if (coutMatch) {
+      outputText = coutMatch[2].trim();
+      const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
+      if (normalized === 'hello amrinder') {
+        isSuccess = true;
+      } else {
+        realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
+        if (normalized.includes('ali')) {
+          humorousComment = '“Ali is awesome, but Amrinder built this website! Write cout << "Hello Amrinder";”';
+        } else {
+          humorousComment = `“You printed '${outputText}'. Write std::cout << "Hello Amrinder";!”`;
+        }
+      }
     } else {
-      realError = 'error: fatal error: compilation failed in std::basic_ostream';
-      humorousComment = '“Compilation failed. Congratulations. You have discovered why people don\'t casually choose C++.”';
+      realError = 'error: fatal error: std::cout statement missing or invalid string format';
+      humorousComment = '“Compilation failed. You have discovered why people don\'t casually choose C++.”';
     }
   } 
   else if (lang === 'java') {
-    if ((code.includes('System.out.println') || code.includes('System.out.print')) && code.includes('Hello Amrinder') && code.includes('main')) {
-      isSuccess = true;
-      outputText = 'Hello Amrinder';
+    const javaMatch = cleanCode.match(/System\.out\.print(?:ln)?\s*\(\s*(["'])(.*?)\1\s*\)/s);
+    if (!cleanCode.includes('main')) {
+      realError = 'Error: Main method not found in class Main';
+      humorousComment = '“Java is looking for public static void main. Java demands ritual boilerplates.”';
+    } else if (!cleanCode.includes(';')) {
+      realError = 'error: \';\' expected';
+      humorousComment = '“Java compilation error: missing semicolon.”';
+    } else if (javaMatch) {
+      outputText = javaMatch[2].trim();
+      const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
+      if (normalized === 'hello amrinder') {
+        isSuccess = true;
+      } else {
+        realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
+        if (normalized.includes('ali')) {
+          humorousComment = '“Wait, who is Ali? 😂 Write System.out.println("Hello Amrinder");!”';
+        } else {
+          humorousComment = `“You printed '${outputText}'. Write System.out.println("Hello Amrinder");!”`;
+        }
+      }
     } else {
       realError = 'Exception in thread "main" java.lang.Error: Unresolved compilation problem';
-      humorousComment = '“Java has rejected your existence. Please check your syntax.”';
+      humorousComment = '“Java has rejected your code. Please write System.out.println("Hello Amrinder");”';
     }
   }
 
