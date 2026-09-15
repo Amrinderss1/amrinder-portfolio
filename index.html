@@ -442,13 +442,13 @@
               </button>
             </div>
 
-            <div class="contact-method" id="contact-phone-row">
+            <div class="contact-method" id="contact-phone-row" style="display: none;">
               <div class="contact-icon-box"><i class="fas fa-phone-alt"></i></div>
               <div class="contact-detail">
                 <label>Phone</label>
-                <span id="contact-phone-text">+91 88023-26828</span>
+                <span id="contact-phone-text"></span>
               </div>
-              <button class="copy-btn" onclick="copyToClipboard('+91 88023-26828', 'Phone')">
+              <button class="copy-btn" onclick="copyToClipboard('', 'Phone')">
                 <i class="fas fa-copy"></i>
               </button>
             </div>
@@ -549,6 +549,13 @@
     if (mobileMenuBtn && navMenu) {
       mobileMenuBtn.addEventListener('click', () => {
         navMenu.classList.toggle('active');
+      });
+
+      // Auto-close mobile navigation drawer on link selection
+      navMenu.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('active');
+        });
       });
     }
   </script>
