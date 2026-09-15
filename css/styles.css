@@ -331,6 +331,7 @@ body.cursor-hover .cursor-follower {
   transition: transform var(--transition-spring), box-shadow var(--transition-normal), background var(--transition-normal);
   position: relative;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .btn-primary {
@@ -605,7 +606,7 @@ body.cursor-hover .cursor-follower {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 24px;
 }
 
@@ -623,22 +624,6 @@ body.cursor-hover .cursor-follower {
 .stat-card:hover {
   transform: translateY(-5px);
   border-color: var(--border-hover);
-}
-
-.stat-card[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: -36px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-tertiary);
-  color: var(--accent-secondary);
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  white-space: nowrap;
-  border: 1px solid var(--border-hover);
-  z-index: 20;
 }
 
 .stat-number-wrapper {
@@ -899,7 +884,7 @@ body.cursor-hover .cursor-follower {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 32px;
 }
 
@@ -1018,7 +1003,7 @@ body.cursor-hover .cursor-follower {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
 }
 
@@ -1094,7 +1079,7 @@ body.cursor-hover .cursor-follower {
 
 .awards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
 }
 
@@ -1156,7 +1141,7 @@ body.cursor-hover .cursor-follower {
 
 .beyond-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
 }
 
@@ -1224,7 +1209,7 @@ body.cursor-hover .cursor-follower {
    -------------------------------------------------------------------------- */
 .certs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
@@ -1320,6 +1305,7 @@ body.cursor-hover .cursor-follower {
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-primary);
+  word-break: break-all;
 }
 
 .copy-btn {
@@ -1529,7 +1515,7 @@ body.cursor-hover .cursor-follower {
 .compiler-terminal.error { border-color: #ef4444; }
 
 .fade-in-content {
-  animation: fadeInStep 0.4s ease forward;
+  animation: fadeInStep 0.4s ease forwards;
 }
 
 @keyframes fadeInStep {
@@ -1723,7 +1709,7 @@ body.cursor-hover .cursor-follower {
 }
 
 /* --------------------------------------------------------------------------
-   21. RESPONSIVE BREAKPOINTS
+   21. COMPREHENSIVE RESPONSIVE BREAKPOINTS (DESKTOP, TABLET, MOBILE)
    -------------------------------------------------------------------------- */
 @media (max-width: 992px) {
   .hero-grid, .about-grid, .contact-grid {
@@ -1754,13 +1740,107 @@ body.cursor-hover .cursor-follower {
   }
 }
 
+@media (max-width: 768px) {
+  .interactive-gate-overlay {
+    padding: 12px;
+  }
+  
+  .gate-card-box {
+    padding: 70px 16px 24px 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .gate-top-actions {
+    top: 14px;
+    right: 14px;
+    gap: 6px;
+  }
+
+  .skip-intro-btn {
+    padding: 4px 10px;
+    font-size: 0.775rem;
+  }
+
+  .boot-terminal-window {
+    padding: 14px;
+    font-size: 0.825rem;
+    min-height: 180px;
+  }
+
+  .lang-selector-bar {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .code-editor-textarea {
+    font-size: 0.85rem;
+    padding: 10px;
+    min-height: 100px;
+  }
+
+  .compiler-terminal {
+    font-size: 0.825rem;
+    padding: 10px;
+  }
+
+  .timeline::before {
+    left: 12px;
+  }
+
+  .timeline-item {
+    padding-left: 32px;
+  }
+
+  .timeline-dot {
+    left: 4px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .timeline-card {
+    padding: 20px;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .contact-info-card, .contact-form {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 600px) {
-  .hero-title { font-size: 2.2rem; }
-  .section-header .section-title { font-size: 1.85rem; }
+  .hero-title { font-size: 2.1rem; letter-spacing: -0.5px; }
+  .typewriter-wrapper { font-size: 1.1rem; }
+  .section-header .section-title { font-size: 1.75rem; }
   .highlights-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
-  .avatar-wrapper { width: 250px; height: 250px; }
-  .gate-card-box { padding: 24px; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .beyond-grid { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
+  .awards-grid { grid-template-columns: 1fr; }
+  .avatar-wrapper { width: 220px; height: 220px; }
+  
+  .floating-chip {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+
+  .chip-1 { left: -10px; top: -10px; }
+  .chip-2 { right: -10px; bottom: -10px; }
 }
 
 /* --------------------------------------------------------------------------
