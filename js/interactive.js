@@ -385,15 +385,15 @@ function validateCodeResult(lang, code, outputEl) {
     humorousComment = '“Writing zero lines of code is a great way to avoid bugs, but you still need to print Hello Amrinder!”';
   }
   else if (lang === 'python') {
-    const printMatch = cleanCode.match(/print\s*\(\s*(["'])(.*?)\1\s*\)/s);
-    if (printMatch) {
-      outputText = printMatch[2].trim();
+    const printMatch = cleanCode.match(/print\s*\(\s*(["']?)(.*?)\1\s*\)/s);
+    if (printMatch && printMatch[2].trim()) {
+      outputText = printMatch[2].replace(/^["']|["']$/g, '').trim();
       const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
       if (normalized === 'hello amrinder') {
         isSuccess = true;
       } else {
         realError = `OutputMismatchError: Expected "Hello Amrinder", Received "${outputText}"`;
-        if (normalized.includes('ali')) {
+        if (/\bali\b/i.test(normalized)) {
           humorousComment = '“Wait... who is Ali? 😂 This is Amrinder\'s portfolio! Write print("Hello Amrinder")!”';
         } else {
           humorousComment = `“You printed '${outputText}'! Come on bro, write print("Hello Amrinder")!”`;
@@ -411,21 +411,21 @@ function validateCodeResult(lang, code, outputEl) {
     }
   } 
   else if (lang === 'c') {
-    const printfMatch = cleanCode.match(/printf\s*\(\s*(["'])(.*?)\1\s*\)/s);
+    const printfMatch = cleanCode.match(/printf\s*\(\s*(["']?)(.*?)\1\s*\)/s);
     if (!cleanCode.includes('main')) {
       realError = 'error: undefined reference to \'main\'';
       humorousComment = '“C cannot find main(). C is lost in memory without main().”';
     } else if (!cleanCode.includes(';')) {
       realError = 'error: expected \';\' before end of statement';
       humorousComment = '“Compilation failed. Semicolons missing as usual in C!”';
-    } else if (printfMatch) {
-      outputText = printfMatch[2].replace('\\n', '').trim();
+    } else if (printfMatch && printfMatch[2].trim()) {
+      outputText = printfMatch[2].replace(/^["']|["']$/g, '').replace('\\n', '').trim();
       const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
       if (normalized === 'hello amrinder') {
         isSuccess = true;
       } else {
         realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
-        if (normalized.includes('ali')) {
+        if (/\bali\b/i.test(normalized)) {
           humorousComment = '“Wait... who is Ali? 😂 Write printf("Hello Amrinder");!”';
         } else {
           humorousComment = `“You printed '${outputText}'. Write printf("Hello Amrinder");!”`;
@@ -437,21 +437,21 @@ function validateCodeResult(lang, code, outputEl) {
     }
   } 
   else if (lang === 'cpp') {
-    const coutMatch = cleanCode.match(/(?:std::)?cout\s*<<\s*(["'])(.*?)\1/s);
+    const coutMatch = cleanCode.match(/(?:std::)?cout\s*<<\s*(["']?)(.*?)\1/s);
     if (!cleanCode.includes('main')) {
       realError = 'error: undefined reference to \'main\'';
       humorousComment = '“C++ cannot find main().”';
     } else if (!cleanCode.includes(';')) {
       realError = 'error: expected \';\' before end of statement';
       humorousComment = '“C++ compilation error: missing semicolon.”';
-    } else if (coutMatch) {
-      outputText = coutMatch[2].trim();
+    } else if (coutMatch && coutMatch[2].trim()) {
+      outputText = coutMatch[2].replace(/^["']|["']$/g, '').trim();
       const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
       if (normalized === 'hello amrinder') {
         isSuccess = true;
       } else {
         realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
-        if (normalized.includes('ali')) {
+        if (/\bali\b/i.test(normalized)) {
           humorousComment = '“Ali is awesome, but Amrinder built this website! Write cout << "Hello Amrinder";”';
         } else {
           humorousComment = `“You printed '${outputText}'. Write std::cout << "Hello Amrinder";!”`;
@@ -463,21 +463,21 @@ function validateCodeResult(lang, code, outputEl) {
     }
   } 
   else if (lang === 'java') {
-    const javaMatch = cleanCode.match(/System\.out\.print(?:ln)?\s*\(\s*(["'])(.*?)\1\s*\)/s);
+    const javaMatch = cleanCode.match(/System\.out\.print(?:ln)?\s*\(\s*(["']?)(.*?)\1\s*\)/s);
     if (!cleanCode.includes('main')) {
       realError = 'Error: Main method not found in class Main';
       humorousComment = '“Java is looking for public static void main. Java demands ritual boilerplates.”';
     } else if (!cleanCode.includes(';')) {
       realError = 'error: \';\' expected';
       humorousComment = '“Java compilation error: missing semicolon.”';
-    } else if (javaMatch) {
-      outputText = javaMatch[2].trim();
+    } else if (javaMatch && javaMatch[2].trim()) {
+      outputText = javaMatch[2].replace(/^["']|["']$/g, '').trim();
       const normalized = outputText.toLowerCase().replace(/\s+/g, ' ');
       if (normalized === 'hello amrinder') {
         isSuccess = true;
       } else {
         realError = `Output mismatch. Expected "Hello Amrinder", Received "${outputText}"`;
-        if (normalized.includes('ali')) {
+        if (/\bali\b/i.test(normalized)) {
           humorousComment = '“Wait, who is Ali? 😂 Write System.out.println("Hello Amrinder");!”';
         } else {
           humorousComment = `“You printed '${outputText}'. Write System.out.println("Hello Amrinder");!”`;

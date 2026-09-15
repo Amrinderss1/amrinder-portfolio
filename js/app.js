@@ -202,9 +202,12 @@ function renderProjectsData() {
     
     filterContainer.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
+        const filterBtn = e.target.closest('.filter-btn');
+        if (!filterBtn) return;
+        const filterCategory = filterBtn.getAttribute('data-filter');
         filterContainer.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        filterProjects(e.target.getAttribute('data-filter'));
+        filterBtn.classList.add('active');
+        filterProjects(filterCategory);
       });
     });
   }
@@ -243,13 +246,16 @@ function renderProjectsData() {
 function filterProjects(category) {
   const cards = document.querySelectorAll('.project-card');
   cards.forEach(card => {
-    if (category === 'all' || card.getAttribute('data-category') === category) {
+    const cardCat = card.getAttribute('data-category');
+    if (!category || category === 'all' || cardCat === category) {
       card.style.display = 'flex';
-      setTimeout(() => { card.style.opacity = '1'; card.style.transform = 'scale(1)'; }, 50);
+      card.style.opacity = '1';
+      card.style.transform = 'none';
+      card.style.visibility = 'visible';
     } else {
+      card.style.display = 'none';
       card.style.opacity = '0';
-      card.style.transform = 'scale(0.8)';
-      setTimeout(() => { card.style.display = 'none'; }, 300);
+      card.style.visibility = 'hidden';
     }
   });
 }
