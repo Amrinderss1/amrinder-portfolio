@@ -163,17 +163,68 @@ const PORTFOLIO_DATA = {
       subtitle: "Desktop Administration & Automation Console",
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
       tags: ["Python", "PySide6", "SQLite", "REST APIs", "Ollama"],
-      shortDesc: "Developed a desktop administration tool for VMware Workspace ONE UEM (AirWatch) to monitor and manage endpoint operations.",
-      fullDesc: "UEM Sentinel is a personal engineering project built around VMware Workspace ONE UEM. The project provides a desktop interface for monitoring and managing endpoint operations, combining UEM data retrieval, local caching, querying and automation capabilities. It also explores natural-language interaction with enterprise UEM systems, allowing administrative requests to be translated into structured operations.",
-      whyIBuiltIt: "Built out of personal curiosity to explore how enterprise endpoint operations and UEM administration can be simplified, automated, and queried using modern desktop interfaces and local AI LLM integrations.",
+      shortDesc: "Desktop administration tool for VMware Workspace ONE UEM (AirWatch) to monitor and manage endpoint operations.",
+      fullDesc: "UEM Sentinel is a personal engineering project built around VMware Workspace ONE UEM. The project provides a desktop interface for monitoring and managing endpoint operations, combining UEM data retrieval, local caching, querying, and automation capabilities.",
+      redactedNotice: "🔒 PRIVACY & SECURITY REDACTION: Live enterprise tenant keys, internal server endpoints, and proprietary production parameters are redacted for privacy and security reasons. Describing high-level anonymized architecture only.",
+      whyIBuiltIt: "Built out of personal curiosity to explore how enterprise endpoint operations and UEM administration can be simplified and queried using modern desktop interfaces and local AI LLM integrations.",
       keyFeatures: [
-        "Developed a desktop administration tool for VMware Workspace ONE UEM (AirWatch) to monitor and manage endpoint operations.",
+        "Privacy & Security Protection: Production parameters redacted for security compliance.",
         "Integrated REST APIs and SQLite for data retrieval and local caching.",
         "Implemented natural language queries and reporting capabilities for administrative tasks."
       ],
-      status: "Private Source / Demo",
+      status: "Private Source / Redacted Demo",
       demoUrl: null,
-      githubUrl: null
+      githubUrl: null,
+      downloadUrl: null
+    },
+    {
+      id: "project-mailer-app",
+      title: "Universal Bulk Email Campaign Mailer",
+      category: "personal",
+      categoryLabel: "Personal Project",
+      subtitle: "CustomTkinter GUI & Bulk Campaign Engine",
+      image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&q=80&w=800",
+      tags: ["Python", "CustomTkinter", "Pandas", "OpenPyXL", "SMTP"],
+      shortDesc: "A standalone bulk email campaign management app built with CustomTkinter, Excel recipient list parsing, progress tracking, and state persistence.",
+      fullDesc: "Universal Email Campaign Mailer is a full desktop GUI application built in Python using CustomTkinter. It allows loading recipient lists directly from Excel (.xlsx) files via Pandas & OpenPyXL, attaching custom files, monitoring campaign execution in real-time, saving progress in mailer_state.json, and sending authenticated emails via SMTP.",
+      whyIBuiltIt: "Built to streamline bulk campaign dispatches with a sleek modern dark mode desktop interface and state persistence.",
+      keyFeatures: [
+        "CustomTkinter Dark Mode GUI with real-time campaign progress tracking.",
+        "Excel (.xlsx) recipient list loading and dynamic column parsing via Pandas & OpenPyXL.",
+        "Campaign state recovery and automatic state persistence (mailer_state.json).",
+        "Includes sample Excel template and source code created by Amrinder."
+      ],
+      status: "Downloadable App Package",
+      demoUrl: null,
+      githubUrl: null,
+      downloadUrl: "downloads/Amrinder_Mailer_App_Created_by_Amrinder.zip",
+      downloadLabel: "Download Mailer App (.zip) — Created by Amrinder"
+    },
+    {
+      id: "project-self-destruct",
+      title: "Voice-Activated Self Destruct Failsafe Console",
+      category: "personal",
+      categoryLabel: "Personal Project & Sci-Fi Story",
+      subtitle: "Star Trek Inspired Voice Security System",
+      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+      tags: ["Python", "SpeechRecognition", "pyttsx3", "Tkinter", "send2trash"],
+      shortDesc: "A voice-authenticated failsafe console inspired by Star Trek self-destruct sequences, featuring voice verification, 60s countdown, soothing female TTS, and safe Recycle Bin triggers.",
+      fullDesc: "How the idea came about: Inspired by Captain Kirk & Captain Picard's iconic voice-authenticated self-destruct countdown sequences in Star Trek ('Computer, this is Amrinder speaking. Initiate self destruct sequence code 101, 102...'), Amrinder built a complete Python desktop console! It features voice/passphrase authentication ('Computer this is Amrinder speaking'), 60s dramatic countdown, soothing female TTS feedback, and safe Recycle Bin triggers (using send2trash so no actual system damage occurs!).",
+      videoUrl: "https://www.youtube.com/embed/XIm6_2NzIc4",
+      videoTitle: "Inspiration: Star Trek Self-Destruct Sequence",
+      whyIBuiltIt: "Built out of love for sci-fi and Star Trek, turning a movie trope into a working, voice-authenticated Python desktop app.",
+      keyFeatures: [
+        "Voice Passphrase Auth: 'Computer this is Amrinder speaking' (SpeechRecognition + fallback manual).",
+        "Self Destruct Sequence Codes: Accepts codes 101, 102, 103, 104.",
+        "60s Countdown Timer with Abort and 'No Mercy' lock controls.",
+        "Soothing Female Voice Narration (pyttsx3).",
+        "Safety Guaranteed: Uses send2trash to move files safely to Recycle Bin."
+      ],
+      status: "Downloadable App Package & Video Story",
+      demoUrl: null,
+      githubUrl: null,
+      downloadUrl: "downloads/Amrinder_Self_Destruct_Failsafe_Console_Created_by_Amrinder.zip",
+      downloadLabel: "Download Self Destruct Console (.zip) — Created by Amrinder"
     },
     {
       id: "project-enterprise-exp",
@@ -181,7 +232,7 @@ const PORTFOLIO_DATA = {
       category: "enterprise",
       categoryLabel: "Professional Experience",
       subtitle: "4 Major Enterprise Implementations",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=800",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800",
       tags: ["Workspace ONE", "Microsoft Intune", "SCCM/MECM", "Active Directory"],
       shortDesc: "Over my career, I have contributed to four enterprise projects spanning endpoint management, enterprise mobility, application deployment and endpoint operations across global environments.",
       fullDesc: "Throughout my professional journey at Infosys and TCS, I have served as a core contributor across four major enterprise project environments. To honor client confidentiality, specific client brands and proprietary details remain undisclosed.",
@@ -194,7 +245,8 @@ const PORTFOLIO_DATA = {
       ],
       status: "Enterprise Client Engagements (Confidential)",
       demoUrl: null,
-      githubUrl: null
+      githubUrl: null,
+      downloadUrl: null
     }
   ],
 
