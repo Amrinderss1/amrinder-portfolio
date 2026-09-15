@@ -34,28 +34,36 @@ function initParticleCanvas() {
     mouse.targetY = e.clientY;
   });
   
-  // Particle definition
-  const numParticles = Math.min(Math.floor(width / 20), 65);
+  // Particle definition - optimized count
+  const numParticles = Math.min(Math.floor(width / 40), 32);
   const particles = [];
   
   for (let i = 0; i < numParticles; i++) {
     particles.push({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
       radius: Math.random() * 2 + 1,
-      baseAlpha: Math.random() * 0.4 + 0.15
+      baseAlpha: Math.random() * 0.35 + 0.15
     });
   }
   
+  const distCutoffSq = 130 * 130;
+  const mDistCutoffSq = 160 * 160;
+
   function render() {
+    // Pause background canvas rendering while any modal overlay is active to free up GPU & CPU
+    if (document.querySelector('.modal-overlay.active, .retro-terminal-overlay.active')) {
+      requestAnimationFrame(render);
+      return;
+    }
+
     mouse.x += (mouse.targetX - mouse.x) * 0.05;
     mouse.y += (mouse.targetY - mouse.y) * 0.05;
     
     ctx.clearRect(0, 0, width, height);
     
-    // Check dark/light mode for particle colors
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
     const pColor = isDark ? '99, 102, 241' : '79, 70, 229';
     
@@ -69,20 +77,19 @@ function initParticleCanvas() {
       if (p.y < 0) p.y = height;
       if (p.y > height) p.y = 0;
       
-      // Draw particle dot
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(${pColor}, ${p.baseAlpha})`;
       ctx.fill();
       
-      // Connect nearby particles
       for (let j = i + 1; j < particles.length; j++) {
         const p2 = particles[j];
         const dx = p.x - p2.x;
         const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
+        const distSq = dx * dx + dy * dy;
         
-        if (dist < 130) {
+        if (distSq < distCutoffSq) {
+          const dist = Math.sqrt(distSq);
           const alpha = (1 - dist / 130) * 0.2;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
@@ -93,11 +100,11 @@ function initParticleCanvas() {
         }
       }
       
-      // Mouse interaction line
       const mDx = p.x - mouse.x;
       const mDy = p.y - mouse.y;
-      const mDist = Math.sqrt(mDx * mDx + mDy * mDy);
-      if (mDist < 160) {
+      const mDistSq = mDx * mDx + mDy * mDy;
+      if (mDistSq < mDistCutoffSq) {
+        const mDist = Math.sqrt(mDistSq);
         const mAlpha = (1 - mDist / 160) * 0.35;
         ctx.beginPath();
         ctx.moveTo(p.x, p.y);
@@ -249,33 +256,37 @@ function initTypewriter() {
    5. 3D CARD TILT & MOUSE SPOTLIGHT FX
    ========================================================================== */
 function initCardTiltFX() {
-  document.body.addEventListener('mousemove', (e) => {
-    const cards = document.querySelectorAll('.project-card, .stat-card, .highlight-card, .skill-category-card');
+  let activeCard = null;
+
+  document.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('.project-card');
+    if (card) {
+      activeCard = card;
+    }
+  });
+
+  document.addEventListener('mouseout', (e) => {
+    if (activeCard && !activeCard.contains(e.relatedTarget)) {
+      activeCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      activeCard = null;
+    }
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!activeCard) return;
+    const rect = activeCard.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
-    cards.forEach(card => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      // Update specular shine variables
-      card.style.setProperty('--mouse-x', `${x}px`);
-      card.style.setProperty('--mouse-y', `${y}px`);
-      
-      // 3D tilt calculation for project cards
-      if (card.classList.contains('project-card')) {
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        
-        const rotateX = ((y - centerY) / centerY) * -7; // Max 7 deg
-        const rotateY = ((x - centerX) / centerX) * 7;
-        
-        if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-          card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-        } else {
-          card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0)';
-        }
-      }
-    });
+    activeCard.style.setProperty('--mouse-x', `${x}px`);
+    activeCard.style.setProperty('--mouse-y', `${y}px`);
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+    
+    activeCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
   });
 }
 
@@ -294,16 +305,20 @@ function initCustomCursor() {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    cursor.style.left = `${mouseX}px`;
-    cursor.style.top = `${mouseY}px`;
+    cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
   });
   
   function follow() {
-    posX += (mouseX - posX) * 0.15;
-    posY += (mouseY - posY) * 0.15;
+    // Pause follower updates when modal is active to free up main thread
+    if (document.querySelector('.modal-overlay.active, .retro-terminal-overlay.active')) {
+      requestAnimationFrame(follow);
+      return;
+    }
+
+    posX += (mouseX - posX) * 0.18;
+    posY += (mouseY - posY) * 0.18;
     
-    follower.style.left = `${posX}px`;
-    follower.style.top = `${posY}px`;
+    follower.style.transform = `translate3d(${posX}px, ${posY}px, 0) translate(-50%, -50%)`;
     
     requestAnimationFrame(follow);
   }

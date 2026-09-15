@@ -163,48 +163,11 @@ img {
 }
 
 /* --------------------------------------------------------------------------
-   4. CUSTOM CURSOR
+   4. CUSTOM CURSOR (DISABLED FOR NATIVE MOUSE SPEED & ACCURACY)
    -------------------------------------------------------------------------- */
-.custom-cursor {
-  position: fixed;
-  width: 8px;
-  height: 8px;
-  background: var(--accent-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
-}
-
-.cursor-follower {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid var(--accent-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease-out, width 0.2s, height 0.2s, border-color 0.2s, opacity 0.2s;
-  opacity: 0.6;
-}
-
-body.cursor-hover .custom-cursor {
-  width: 16px;
-  height: 16px;
-  background: var(--accent-secondary);
-}
-
-body.cursor-hover .cursor-follower {
-  width: 54px;
-  height: 54px;
-  border-color: var(--accent-secondary);
-  opacity: 0.3;
-}
-
-@media (max-width: 992px) {
-  .custom-cursor, .cursor-follower { display: none !important; }
+.custom-cursor, .cursor-follower {
+  display: none !important;
+  pointer-events: none !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -1558,21 +1521,24 @@ body.cursor-hover .cursor-follower {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 13, 20, 0.85);
-  backdrop-filter: blur(16px);
+  background: rgba(8, 11, 18, 0.95);
   z-index: 9000;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   padding: 24px;
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transition: opacity var(--transition-normal);
 }
 
 .modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 100000 !important;
 }
 
 .modal-container {
@@ -1904,3 +1870,421 @@ body.cursor-hover .cursor-follower {
     color: #000 !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   23. PHASE 2 EASTER EGGS, TERMINAL & ACHIEVEMENTS STYLES
+   -------------------------------------------------------------------------- */
+
+/* Retro Terminal Overlay */
+.retro-terminal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 11, 18, 0.96);
+  z-index: 10005;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
+}
+
+.retro-terminal-overlay.active {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 100000 !important;
+}
+
+.retro-term-window {
+  width: 100%;
+  max-width: 800px;
+  height: 500px;
+  max-height: 85vh;
+  background: #080b11;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.retro-term-header {
+  padding: 12px 16px;
+  background: rgba(18, 24, 38, 0.9);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.term-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.term-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.term-dots .dot.red { background: #ef4444; }
+.term-dots .dot.yellow { background: #f59e0b; }
+.term-dots .dot.green { background: #10b981; }
+
+.term-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.term-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.term-close-btn:hover { color: var(--text-primary); }
+
+.retro-term-body {
+  flex: 1;
+  padding: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  overflow-y: auto;
+}
+
+.term-welcome {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.term-line {
+  margin-bottom: 8px;
+  word-break: break-word;
+}
+
+.term-cmd {
+  color: #6366f1;
+  font-weight: 700;
+}
+
+.term-res {
+  color: #cbd5e1;
+  white-space: pre-wrap;
+  margin-bottom: 14px;
+}
+
+.term-prompt {
+  color: #10b981;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.retro-term-footer {
+  padding: 12px 16px;
+  background: rgba(10, 13, 20, 0.95);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+}
+
+.term-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+/* Achievement Toast Notifications */
+.achievement-toast-container {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 10010;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.achievement-toast {
+  pointer-events: auto;
+  min-width: 300px;
+  max-width: 380px;
+  background: rgba(15, 23, 42, 0.98);
+  border: 1px solid var(--accent-primary);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transform: translateX(120%);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+.achievement-toast.reveal-toast {
+  transform: translateX(0);
+}
+
+.achievement-toast.toast-fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.toast-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.toast-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent-secondary);
+  letter-spacing: 1px;
+}
+
+.toast-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.toast-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Achievement Grid in Modal */
+.achievements-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.achievement-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.achievement-card.unlocked {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.achievement-card.locked {
+  opacity: 0.6;
+}
+
+.ach-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+
+.achievement-card.unlocked .ach-icon-box {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+.ach-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.ach-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.ach-status-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.achievement-card.unlocked .ach-status-tag {
+  color: #10b981;
+}
+
+/* Amrinder Diagnostic Tool Scanner UI */
+.diag-console-window {
+  background: #05070a;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  height: 220px;
+  overflow-y: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+}
+
+.diag-log-line {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.diag-prompt { color: var(--text-muted); }
+.diag-text { flex: 1; color: #cbd5e1; }
+.diag-val { font-weight: 700; }
+.diag-success { color: #10b981; }
+.diag-warn { color: #ef4444; }
+
+.diag-report-card {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+}
+
+/* Git Log Developer Timeline */
+.git-log-box {
+  background: #080b11;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: var(--shadow-md);
+}
+
+.git-log-header {
+  padding: 10px 16px;
+  background: rgba(18, 24, 38, 0.8);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.git-log-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.git-commit-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.commit-hash {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.commit-badge.head {
+  color: #10b981;
+  font-size: 0.78rem;
+}
+
+.commit-msg {
+  color: #e2e8f0;
+  flex: 1;
+}
+
+.commit-date {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.git-log-footer {
+  padding: 10px 16px;
+  background: rgba(10, 13, 20, 0.9);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Space Trivia Card Response */
+.space-res-card {
+  background: rgba(6, 182, 212, 0.1);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  border-radius: 10px;
+  padding: 16px;
+  margin-top: 16px;
+  text-align: left;
+}
+
+.space-res-card h4 {
+  font-size: 1.1rem;
+  color: #06b6d4;
+  margin-bottom: 6px;
+}
+
+.space-res-card p {
+  font-size: 0.925rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Random Fact Card */
+.fact-card {
+  background: rgba(168, 85, 247, 0.1);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.fact-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #a855f7;
+  margin-bottom: 8px;
+}
+
+.fact-text {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+

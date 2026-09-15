@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404: Page Expanded Out of Existence | Amrinder Pal Singh</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .error-card-container {
+      max-width: 640px;
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .error-code-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .error-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .error-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .astro-quote {
+      background: rgba(10, 13, 20, 0.6);
+      border-left: 3px solid var(--accent-primary);
+      padding: 14px 18px;
+      border-radius: 0 10px 10px 0;
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .error-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    canvas#space-404-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Space Particle Canvas -->
+  <canvas id="space-404-canvas"></canvas>
+
+  <div class="error-card-container">
+    <div class="error-code-badge">
+      <i class="fas fa-exclamation-triangle"></i> ERROR 404
+    </div>
+    
+    <h1 class="error-title">PAGE EXPANDED OUT OF EXISTENCE 🌌</h1>
+    
+    <p class="error-desc">
+      According to Hubble's law, the universe is expanding at roughly 70 km/s per megaparsec.<br>
+      Unfortunately, the page you were looking for expanded beyond our observable horizon.
+    </p>
+
+    <div class="astro-quote">
+      "The universe is not only queerer than we suppose, but queerer than we can suppose."<br>
+      <strong style="color: var(--accent-secondary); font-style: normal;">— J.B.S. Haldane</strong>
+    </div>
+
+    <div class="error-actions">
+      <a href="index.html" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Take Me Back to Amrinder's Space
+      </a>
+      <a href="index.html?action=diagnostic" class="btn btn-secondary">
+        <i class="fas fa-stethoscope"></i> Run System Diagnostic
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Simple space particle canvas
+    const canvas = document.getElementById('space-404-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const stars = [];
+      for (let i = 0; i < 100; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          alpha: Math.random(),
+          speed: Math.random() * 0.02 + 0.005
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let s of stars) {
+          s.alpha += s.speed;
+          if (s.alpha > 1 || s.alpha < 0) s.speed = -s.speed;
+          ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(s.alpha)})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+  </script>
+</body>
+</html>

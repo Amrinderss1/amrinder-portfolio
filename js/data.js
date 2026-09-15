@@ -75,7 +75,7 @@ const PORTFOLIO_DATA = {
     {
       company: "Infosys Limited",
       role: "Associate Consultant – Mobility (MDM/MAM) Team",
-      period: "Nov 2025 – Present",
+      period: "Jan 2026 – Present",
       location: "India",
       description: "Manage enterprise devices using VMware Workspace ONE (AirWatch), including enrollment, compliance, and configuration management.",
       responsibilities: [
@@ -90,7 +90,7 @@ const PORTFOLIO_DATA = {
     {
       company: "Tata Consultancy Services (TCS)",
       role: "System Engineer – Deployment Team",
-      period: "Feb 2024 – Oct 2025",
+      period: "Feb 2024 – Dec 2025",
       location: "India",
       description: "Managed application deployments using SCCM and Microsoft Intune across LATAM and EMEA regions.",
       responsibilities: [
@@ -119,7 +119,7 @@ const PORTFOLIO_DATA = {
     },
     {
       company: "Tata Consultancy Services (TCS)",
-      role: "System Analyst – Level 2 Operations",
+      role: "Programmer – Level 2 Operations",
       period: "Feb 2022 – Feb 2023",
       location: "India",
       description: "Monitored device compliance, resolved incidents, and managed application assignments.",

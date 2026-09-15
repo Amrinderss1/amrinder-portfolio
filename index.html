@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Core Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=20260916_03" />
 </head>
 <body>
 
@@ -210,6 +210,12 @@
       </nav>
 
       <div class="nav-actions">
+        <button class="theme-toggle-btn" onclick="toggleTerminal()" title="Open Hidden Terminal (>_)">
+          <i class="fas fa-terminal text-accent"></i>
+        </button>
+        <button class="theme-toggle-btn" id="achievement-counter-btn" onclick="openAchievementsModal()" title="View Achievements">
+          <i class="fas fa-trophy text-accent"></i> <span>0/9</span>
+        </button>
         <button class="theme-toggle-btn tts-toggle-btn" id="tts-toggle-btn" title="Toggle Voice / Read Aloud">
           <i class="fas fa-volume-mute"></i>
         </button>
@@ -310,6 +316,56 @@
 
         <div class="timeline" id="timeline-container">
           <!-- Timeline items populated dynamically -->
+        </div>
+
+        <!-- Git Log Developer Timeline -->
+        <div style="margin-top: 48px;" class="reveal-on-scroll reveal-fade-up">
+          <div class="git-log-box">
+            <div class="git-log-header">
+              <i class="fas fa-code-branch text-accent"></i> &gt; git log --oneline --graph --decorate
+            </div>
+            <div class="git-log-body">
+              <div class="git-commit-row">
+                <span class="commit-hash">a7f910b</span>
+                <span class="commit-badge head">(HEAD -&gt; main, origin/main)</span>
+                <span class="commit-msg">feat(career): Joined Infosys as Associate Consultant (Enterprise Mobility Specialist)</span>
+                <span class="commit-date">2026</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">e5d4c3b</span>
+                <span class="commit-msg">feat(career): Promoted to System Engineer at TCS &amp; Completed MCA from Chandigarh University</span>
+                <span class="commit-date">2024</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">d2c1b0a</span>
+                <span class="commit-msg">feat(career): Promoted to Assistant System Engineer at TCS &amp; 6x On-the-Spot Awards</span>
+                <span class="commit-date">2023</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">c4e281a</span>
+                <span class="commit-msg">feat(career): Promoted to Programmer at TCS</span>
+                <span class="commit-date">2022</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">b3d1902</span>
+                <span class="commit-msg">feat(career): Joined Tata Consultancy Services as Graduate Trainee</span>
+                <span class="commit-date">2021</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">9e8a71f</span>
+                <span class="commit-msg">feat(education): Graduated BCA from Guru Gobind Singh Indraprastha University (GGSIPU)</span>
+                <span class="commit-date">2020</span>
+              </div>
+              <div class="git-commit-row">
+                <span class="commit-hash">0a1b2c3</span>
+                <span class="commit-msg">init(life): Initialized Amrinder.exe with curiosity module v1.0</span>
+                <span class="commit-date">Origin</span>
+              </div>
+            </div>
+            <div class="git-log-footer">
+              On branch main | Nothing to commit, working tree clean (except 47 open browser tabs 🌐)
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -447,6 +503,53 @@
       </div>
     </section>
 
+    <!-- 9C. INTERACTIVE PERSONALITY SANDBOX & TOOLS -->
+    <section class="beyond-section" style="background: rgba(10, 13, 20, 0.6); border-top: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">INTERACTIVE LAB</span>
+          <h2 class="section-title">Personality Sandbox & Micro-Tools 🧪</h2>
+          <p>"Click around to discover Amrinder's diagnostic tools, cricket stance, space choices, and random facts."</p>
+        </div>
+
+        <div class="sandbox-buttons-grid" style="display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; position: relative; z-index: 10;">
+          <button id="btn-diagnostic-trigger" class="btn btn-primary" onclick="openDiagnosticModal()">
+            <i class="fas fa-stethoscope"></i> System Diagnostic v1.0
+          </button>
+          <button id="btn-cricket-trigger" class="btn btn-secondary" onclick="openCricketModal()">
+            <i class="fas fa-baseball-ball"></i> Cricket Analyst Mode 🏏
+          </button>
+          <button id="btn-nerd-trigger" class="btn btn-secondary" onclick="openNerdDetectorModal()">
+            <i class="fas fa-calculator"></i> Nerd Level Detector 🤓
+          </button>
+          <button id="btn-fact-trigger" class="btn btn-secondary" onclick="showRandomFact()">
+            <i class="fas fa-dice"></i> Random Amrinder Fact 🎲
+          </button>
+          <button id="btn-terminal-trigger" class="btn btn-secondary" onclick="toggleTerminal()">
+            <i class="fas fa-terminal"></i> Hidden Terminal (&gt;_)
+          </button>
+        </div>
+
+        <div id="sandbox-output-display" class="sandbox-output-display" style="max-width: 720px; margin: 0 auto 32px auto; display: none;"></div>
+        <div id="random-fact-display" style="display: none;"></div>
+
+        <!-- Space Trivia Interactive Card -->
+        <div class="beyond-card reveal-on-scroll reveal-zoom-in" style="max-width: 720px; margin: 0 auto; padding: 32px;">
+          <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;"><i class="fas fa-user-astronaut text-accent"></i> Ask the Universe: Choose Your Destination 🪐</h3>
+          <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">If you could instantly travel anywhere in space, where would you go?</p>
+          
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px;">
+            <button class="filter-btn" onclick="selectSpaceChoice('saturn')">🪐 Saturn's Rings</button>
+            <button class="filter-btn" onclick="selectSpaceChoice('blackhole')">🕳️ Black Hole</button>
+            <button class="filter-btn" onclick="selectSpaceChoice('eventhorizon')">🌌 Event Horizon</button>
+            <button class="filter-btn" onclick="selectSpaceChoice('safe')">🚀 Low Earth Orbit</button>
+          </div>
+
+          <div id="space-trivia-response" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- 10. CONTACT & SOCIAL HUB -->
     <section class="contact-section" id="contact">
       <div class="container">
@@ -546,8 +649,188 @@
           <!-- Populated dynamically -->
         </ul>
       </div>
+  </div>
+
+  <!-- Retro Terminal Overlay -->
+  <div class="retro-terminal-overlay" id="retro-terminal-overlay">
+    <div class="retro-term-window">
+      <div class="retro-term-header">
+        <div class="term-dots">
+          <span class="dot red" onclick="toggleTerminal()"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green" onclick="toggleMatrixRain()"></span>
+        </div>
+        <div class="term-title">&gt;_ TERMINAL — amrinder@portfolio</div>
+        <button class="term-close-btn" onclick="toggleTerminal()"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="retro-term-body" id="terminal-output-log">
+        <div class="term-line term-welcome">
+          Welcome to Amrinder's Interactive Command Console (v1.0)<br>
+          Type <span class="text-accent">'help'</span> to view available commands. Press <span class="text-accent">ESC</span> to exit.
+        </div>
+      </div>
+      <div class="retro-term-footer">
+        <span class="term-prompt">amrinder@portfolio:~$</span>
+        <input type="text" id="terminal-cmd-input" class="term-input" placeholder="Type a command (e.g. help, about, skills, cricket)..." spellcheck="false" autocomplete="off" />
+      </div>
     </div>
   </div>
+
+  <!-- Achievements Modal -->
+  <div class="modal-overlay" id="achievements-modal">
+    <div class="modal-container" style="max-width: 640px;">
+      <button class="modal-close-btn" onclick="closeAchievementsModal()" aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-body" style="padding-top: 10px;">
+        <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 6px;"><i class="fas fa-trophy text-accent"></i> Portfolio Achievements</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 20px;">Discover hidden easter eggs and complete all 9 challenges!</p>
+        
+        <div class="achievements-list-grid" id="achievements-list-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grand Trophy Modal (100% Completion Award) -->
+  <div class="modal-overlay" id="grand-trophy-modal">
+    <canvas id="confetti-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;"></canvas>
+    <div class="modal-container" style="max-width: 580px; text-align: center; position: relative; z-index: 2; padding: 40px 30px;">
+      <div style="font-size: 4rem; margin-bottom: 12px; animation: pulseGlow 2s infinite;">🏆</div>
+      <h2 style="font-size: 1.8rem; font-weight: 800; color: #f59e0b; margin-bottom: 8px;">YOU HAVE TOO MUCH FREE TIME!</h2>
+      <p style="font-size: 1.05rem; color: var(--text-primary); font-weight: 600; margin-bottom: 16px;">
+        100% Completion Unlocked! (9/9 Achievements)
+      </p>
+      <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 24px;">
+        Congratulations! You have officially explored every corner, diagnostic tool, terminal command, and cricket monologue on this portfolio.<br><br>
+        Amrinder Pal Singh awards you the <strong>Master Explorer Badge</strong>. 🎖️
+      </p>
+      <button class="btn btn-primary" onclick="closeGrandTrophyModal()">
+        Accept Trophy &amp; Continue <i class="fas fa-check-circle"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Amrinder Diagnostic Tool Modal -->
+  <div class="modal-overlay" id="diagnostic-modal">
+    <div class="modal-container" style="max-width: 680px; background: #080b11;">
+      <button class="modal-close-btn" onclick="closeDiagnosticModal()"><i class="fas fa-times"></i></button>
+      <div class="modal-body">
+        <h3 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 6px;"><i class="fas fa-stethoscope text-accent"></i> Amrinder System Diagnostic v1.0</h3>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 16px;">Running hardware, memory, sleep, caffeine &amp; curiosity core integrity checks...</p>
+        
+        <div class="diag-console-window" id="diagnostic-console-log">
+          <!-- Logs printed here -->
+        </div>
+
+        <div id="diagnostic-report-result" style="display: none; margin-top: 20px;" class="reveal-zoom-in">
+          <div class="diag-report-card">
+            <h4>DIAGNOSIS COMPLETE:</h4>
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent-primary); margin: 8px 0;">
+              "You're looking at an engineer. There's nothing we can do. 😂"
+            </p>
+            <p style="font-size: 0.9rem; color: var(--text-secondary);">
+              Recommendation: Supply strong coffee ☕, dark mode theme 🌙, and zero meetings on Friday afternoon.
+            </p>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; display: flex; gap: 12px; justify-content: flex-end;">
+          <button id="diagnostic-start-btn" class="btn btn-secondary btn-sm" onclick="runDiagnosticScan()">
+            <i class="fas fa-redo"></i> Re-run Scan
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="closeDiagnosticModal()">
+            Close Report
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cricket Analyst Mode Modal -->
+  <div class="modal-overlay" id="cricket-modal">
+    <div class="modal-container" style="max-width: 620px;">
+      <button class="modal-close-btn" onclick="closeCricketModal()"><i class="fas fa-times"></i></button>
+      <div class="modal-body" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 8px;">🏏</div>
+        <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Cricket Analyst Mode</h3>
+        <div class="badge" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: #10b981; margin-bottom: 20px;">
+          Opinion strength: HIGH | Argument mode: DISABLED
+        </div>
+
+        <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 16px;">Format Hierarchy Matrix:</h4>
+        
+        <div class="cricket-format-bars" style="text-align: left; margin-bottom: 24px;">
+          <div class="cricket-bar-item" style="margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px; font-weight: 600;">
+              <span>Test Cricket (The Supreme Format)</span>
+              <span class="text-accent">100%</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 100%; background: var(--accent-primary);"></div></div>
+          </div>
+
+          <div class="cricket-bar-item" style="margin-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px; font-weight: 600;">
+              <span>One Day Internationals (ODI)</span>
+              <span style="color: #06b6d4;">75%</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 75%; background: #06b6d4;"></div></div>
+          </div>
+
+          <div class="cricket-bar-item">
+            <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 4px; font-weight: 600;">
+              <span>T20 (Fast &amp; Entertaining)</span>
+              <span style="color: #a855f7;">50%</span>
+            </div>
+            <div class="progress-bg"><div class="progress-fill" style="width: 50%; background: #a855f7;"></div></div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+          <span class="skill-chip"><i class="fas fa-crown text-accent"></i> MS Dhoni Composure</span>
+          <span class="skill-chip"><i class="fas fa-fire text-accent"></i> Virat Kohli Intensity</span>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--text-muted); font-style: italic;">
+          "I come in peace. I just believe 5 days of red ball cricket tests character like nothing else."
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nerd Level Detector Modal -->
+  <div class="modal-overlay" id="nerd-detector-modal">
+    <div class="modal-container" style="max-width: 580px; text-align: center;">
+      <button class="modal-close-btn" onclick="closeNerdDetectorModal()"><i class="fas fa-times"></i></button>
+      <div class="modal-body">
+        <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">🤓 Nerd Level Detector</h3>
+        <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 24px;">Analyzing your visitor telemetry and behavioral pattern...</p>
+
+        <div class="nerd-meter-wrapper" style="margin-bottom: 24px;">
+          <div id="nerd-meter-val" style="font-size: 3rem; font-weight: 800; color: var(--accent-primary);">0%</div>
+          <div class="progress-bg" style="height: 12px; border-radius: 6px; margin-top: 8px;">
+            <div id="nerd-meter-fill" class="progress-fill" style="width: 0%; height: 100%; border-radius: 6px; background: linear-gradient(90deg, #6366f1, #a855f7);"></div>
+          </div>
+        </div>
+
+        <div id="nerd-result-box" style="display: none;" class="reveal-zoom-in">
+          <div class="badge" style="background: rgba(168, 85, 247, 0.2); color: #a855f7; border: 1px solid rgba(168, 85, 247, 0.4); font-size: 1rem; padding: 6px 16px; margin-bottom: 12px;">
+            CLASSIFICATION: SMARTY NERD™
+          </div>
+          <p style="font-size: 1.05rem; color: var(--text-primary); font-weight: 600;">
+            "Leonard-level acceptable. 😎"
+          </p>
+          <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 6px;">
+            (Not quite Sheldon Cooper level, but definitely above Howard's MIT diploma!)
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secret Matrix Canvas -->
+  <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 99998; display: none;"></canvas>
 
   <!-- Footer -->
   <footer class="footer">
@@ -558,10 +841,11 @@
   </footer>
 
   <!-- Application Scripts -->
-  <script src="js/data.js"></script>
-  <script src="js/animations.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/interactive.js"></script>
+  <script src="js/data.js?v=20260916_03"></script>
+  <script src="js/animations.js?v=20260916_03"></script>
+  <script src="js/app.js?v=20260916_03"></script>
+  <script src="js/interactive.js?v=20260916_03"></script>
+  <script src="js/easter_eggs.js?v=20260916_03"></script>
 
   <!-- Navbar Scrolled Handler & Mobile Toggle -->
   <script>
@@ -587,6 +871,12 @@
           navMenu.classList.remove('active');
         });
       });
+    }
+
+    // Auto action launcher from query params (e.g. 404 page link)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('action') === 'diagnostic') {
+      setTimeout(() => openDiagnosticModal(), 800);
     }
   </script>
 </body>

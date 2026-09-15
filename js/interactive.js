@@ -5,7 +5,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initConsoleEasterEgg();
-  initKonamiCode();
   initTextToSpeech();
   initInteractiveGate();
 });
@@ -33,7 +32,7 @@ function initConsoleEasterEgg() {
    ========================================================================== */
 let isSpeechEnabled = false;
 let currentUtterance = null;
-let preferredIndianVoice = null;
+let preferredFemaleVoice = null;
 
 function initTextToSpeech() {
   const ttsBtn = document.getElementById('tts-toggle-btn');
