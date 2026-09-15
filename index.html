@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrinder Pal Singh | Endpoint Management & UEM Engineer</title>
+  <meta name="description" content="Portfolio of Amrinder Pal Singh, an Endpoint Management and Enterprise Mobility Engineer with 5+ years of experience across Microsoft Intune, SCCM/MECM and VMware Workspace ONE, with a passion for software building, automation, AI and technology." />
+
+  <!-- Open Graph Metadata -->
+  <meta property="og:title" content="Amrinder Pal Singh | Endpoint Management & UEM Engineer" />
+  <meta property="og:description" content="Endpoint Management, UEM, enterprise mobility, automation, AI experiments, personal projects and a little bit of science nerdiness." />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Ambient Interactive Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Glowing Ambient Background Orbs -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <!-- Custom Inertia Followers Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- Sticky Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-brand">
+        <span>&lt;</span><span class="brand-gradient">Amrinder</span><span>/&gt;</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <i class="fas fa-sun"></i>
+        </button>
+        <a href="Amrinder_Pal_Singh_Resume.pdf" download="Amrinder_Pal_Singh_Resume.pdf" class="btn btn-secondary btn-sm" aria-label="Download CV">
+          <i class="fas fa-download"></i> Download CV
+        </a>
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Mobile Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Wrappers -->
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content reveal-on-scroll reveal-fade-up">
+          <div class="badge badge-pulse" id="hero-status-badge">Building • Learning • Exploring</div>
+          <h1 class="hero-title">
+            Hi, I'm <span class="text-gradient" id="hero-name">Amrinder</span>
+          </h1>
+          <div class="typewriter-wrapper">
+            <span>I am&nbsp;</span>
+            <span class="typewriter-text" id="typewriter-text"></span>
+            <span class="cursor-blink"></span>
+          </div>
+          <p class="hero-description" id="hero-desc">
+            Associate Consultant with 5+ years of experience in Endpoint Management and Enterprise Mobility, specializing in Microsoft Intune, SCCM/MECM and VMware Workspace ONE. Outside my professional work, I enjoy coding, building personal projects, exploring AI and automation, and going down the occasional rabbit hole about science and space.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">
+              Explore My Work <i class="fas fa-arrow-right"></i>
+            </a>
+            <a href="#experience" class="btn btn-secondary">
+              My Journey <i class="fas fa-compass"></i>
+            </a>
+          </div>
+          <div class="hero-socials" id="hero-socials">
+            <!-- Social links populated dynamically -->
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-on-scroll reveal-zoom-in delay-2">
+          <div class="avatar-wrapper">
+            <img src="images/profile.jpg" alt="Amrinder Pal Singh" class="avatar-img" id="hero-avatar" />
+          </div>
+          <div class="floating-chip chip-1" id="hero-chip-1">
+            <i class="fas fa-code text-accent"></i> 5+ Years Experience
+          </div>
+          <div class="floating-chip chip-2" id="hero-chip-2">
+            <i class="fas fa-award text-accent"></i> 6× On-the-Spot Awards
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. STATS SECTION -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid" id="stats-grid">
+          <!-- Stat cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ABOUT ME SECTION -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">GET TO KNOW ME</span>
+          <h2 class="section-title">Where Enterprise IT Meets Curiosity</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-paragraphs reveal-on-scroll reveal-slide-left" id="about-paragraphs">
+            <!-- Paragraphs populated dynamically -->
+          </div>
+          <div class="highlights-grid" id="highlights-grid">
+            <!-- Highlight cards populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. WORK EXPERIENCE TIMELINE -->
+    <section class="timeline-section" id="experience">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">CAREER PATH</span>
+          <h2 class="section-title">Work Experience & Career Journey</h2>
+        </div>
+
+        <div class="timeline" id="timeline-container">
+          <!-- Timeline items populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. FEATURED PROJECTS SHOWCASE -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">PROJECTS & EXPERIMENTS</span>
+          <h2 class="section-title">Things I've Built</h2>
+          <p>"Some projects started with a problem. Others started with curiosity. Most started with me wondering, 'Can I actually build this?'"</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="filter-bar">
+          <!-- Filter buttons populated dynamically -->
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid" id="projects-grid">
+          <!-- Project cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SKILLS & COMPETENCIES MATRIX -->
+    <section class="skills-section" id="skills">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">TECHNICAL TOOLKIT</span>
+          <h2 class="section-title">Skills & Technologies</h2>
+        </div>
+
+        <div class="skills-grid" id="skills-grid">
+          <!-- Skills populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. EDUCATION & CERTIFICATIONS -->
+    <section class="education-section">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">BACKGROUND & CREDENTIALS</span>
+          <h2 class="section-title">Education & Certifications</h2>
+        </div>
+
+        <div style="margin-bottom: 40px;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 24px; color: var(--accent-secondary);">Education</h3>
+          <div class="timeline" id="education-list">
+            <!-- Education items populated dynamically -->
+          </div>
+        </div>
+
+        <div>
+          <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: var(--accent-secondary);">Certifications & Professional Learning</h3>
+          <div class="certs-grid" id="certs-grid">
+            <!-- Certifications populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. AWARDS & RECOGNITION SECTION -->
+    <section class="awards-section">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">RECOGNITION</span>
+          <h2 class="section-title">Awards & Honors</h2>
+        </div>
+
+        <div class="awards-grid" id="awards-grid">
+          <!-- Awards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. BEYOND THE ENTERPRISE (PERSONALITY SECTION) -->
+    <section class="beyond-section">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">BEYOND THE ENTERPRISE</span>
+          <h2 class="section-title">More Than Just Enterprise IT</h2>
+          <p>"My work revolves around enterprise technology, but my curiosity doesn't stop when the workday ends."</p>
+        </div>
+
+        <div class="beyond-grid" id="beyond-grid">
+          <!-- Beyond cards populated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CONTACT & SOCIAL HUB -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-header reveal-on-scroll reveal-fade-up">
+          <span class="section-subtitle">GET IN TOUCH</span>
+          <h2 class="section-title">Let's Connect</h2>
+          <p>"Whether you found me through my work, one of my projects, a shared interest in technology, or simply stumbled across this corner of the internet — feel free to say hello."</p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Info Box -->
+          <div class="contact-info-card reveal-on-scroll reveal-slide-left">
+            <h3 style="font-size: 1.5rem; margin-bottom: 24px;">Contact Information</h3>
+
+            <div class="contact-method">
+              <div class="contact-icon-box"><i class="fas fa-envelope"></i></div>
+              <div class="contact-detail">
+                <label>Email</label>
+                <a href="mailto:sidhuamrinderpal@gmail.com" id="contact-email-link">sidhuamrinderpal@gmail.com</a>
+              </div>
+              <button class="copy-btn" onclick="copyToClipboard('sidhuamrinderpal@gmail.com', 'Email')">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="contact-method" id="contact-phone-row">
+              <div class="contact-icon-box"><i class="fas fa-phone-alt"></i></div>
+              <div class="contact-detail">
+                <label>Phone</label>
+                <span id="contact-phone-text">+91 88023-26828</span>
+              </div>
+              <button class="copy-btn" onclick="copyToClipboard('+91 88023-26828', 'Phone')">
+                <i class="fas fa-copy"></i>
+              </button>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-icon-box"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="contact-detail">
+                <label>Location</label>
+                <span id="contact-location-text">New Delhi, India</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <form class="contact-form reveal-on-scroll reveal-slide-right" id="contact-form" action="https://formsubmit.co/sidhuamrinderpal@gmail.com" method="POST">
+            <!-- Formsubmit.co config options -->
+            <input type="hidden" name="_subject" value="New Portfolio Message for Amrinder Pal Singh!" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
+            <div class="form-group">
+              <label for="form-name">Your Name</label>
+              <input type="text" id="form-name" name="name" class="form-input" placeholder="e.g. John Doe" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-email">Your Email</label>
+              <input type="email" id="form-email" name="email" class="form-input" placeholder="e.g. john@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="form-message">Message</label>
+              <textarea id="form-message" name="message" class="form-textarea" placeholder="Write a message..." required></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <button type="submit" class="btn btn-primary" style="flex: 1;">
+                Send Message <i class="fas fa-paper-plane"></i>
+              </button>
+              <button type="button" onclick="sendViaMailto()" class="btn btn-secondary" title="Open in your Email App">
+                <i class="fas fa-envelope"></i> Open Mail App
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Project Details Modal Popup -->
+  <div class="modal-overlay" id="project-modal">
+    <div class="modal-container">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        <i class="fas fa-times"></i>
+      </button>
+      <img src="" alt="" class="modal-header-img" id="modal-img" />
+      <div class="modal-body">
+        <h3 id="modal-title">Project Title</h3>
+        <div class="modal-subtitle" id="modal-subtitle">Subheading</div>
+        <p id="modal-desc">Full description...</p>
+        
+        <h4 style="margin-top: 20px;">Key Capabilities & Features:</h4>
+        <ul class="modal-features-list" id="modal-features">
+          <!-- Populated dynamically -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Amrinder Pal Singh.</p>
+      <p class="footer-tagline">"Enterprise technology by profession. Building and exploring by curiosity."</p>
+    </div>
+  </footer>
+
+  <!-- Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Navbar Scrolled Handler & Mobile Toggle -->
+  <script>
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    });
+
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const navMenu = document.getElementById('nav-menu');
+    if (mobileMenuBtn && navMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+      });
+    }
+  </script>
+</body>
+</html>
