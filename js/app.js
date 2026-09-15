@@ -213,7 +213,7 @@ function renderProjectsData() {
   }
   
   grid.innerHTML = PORTFOLIO_DATA.projects.map((p, idx) => `
-    <div class="project-card reveal-on-scroll reveal-zoom-in delay-${(idx % 3) + 1}" data-category="${p.category}" onclick="openProjectModal('${p.id}')" style="cursor: pointer;">
+    <div class="project-card" data-category="${p.category}" onclick="openProjectModal('${p.id}')" style="cursor: pointer;">
       <div class="card-shine"></div>
       <div class="project-image-wrapper">
         <img src="${p.image}" alt="${p.title}" class="project-image" loading="lazy" />

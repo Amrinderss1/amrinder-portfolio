@@ -900,6 +900,8 @@ body.cursor-hover .cursor-follower {
   position: relative;
   display: flex;
   flex-direction: column;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .project-card:hover {
